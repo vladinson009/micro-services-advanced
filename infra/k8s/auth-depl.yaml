@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
                 - name: auth
-                  image: us.gcr.io/microservices-dev-501411/auth
+                  image: vladinson009/auth
                   resources:
                       requests:
                           cpu: '100m'
