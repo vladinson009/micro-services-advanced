@@ -1,0 +1,21 @@
+apiVersion: skaffold/v4beta14
+kind: Config
+metadata:
+    name: micro-services-advanced
+manifests:
+    rawYaml:
+        - ./infra/k8s/*
+deploy:
+    kubectl: {}
+build:
+    local:
+        push: false
+    artifacts:
+        - image: vladinson009/auth
+          context: auth
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: 'src/**/*.ts'
