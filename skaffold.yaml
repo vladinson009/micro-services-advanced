@@ -8,10 +8,10 @@ manifests:
 deploy:
     kubectl: {}
 build:
-    local:
-        push: false
+    googleCloudBuild:
+        projectId: microservices-dev-501411
     artifacts:
-        - image: vladinson009/auth
+        - image: us.gcr.io/microservices-dev-501411/auth
           context: auth
           docker:
               dockerfile: Dockerfile
