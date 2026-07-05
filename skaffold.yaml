@@ -14,7 +14,7 @@ build:
     #     projectId: microservices-dev-501411
     artifacts:
         - image: vladinson009/auth
-          context: auth
+          context: ./auth
           docker:
               dockerfile: Dockerfile
           sync:
