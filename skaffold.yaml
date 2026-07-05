@@ -21,3 +21,5 @@ build:
               manual:
                   - dest: .
                     src: 'src/**/*.ts'
+                  - dest: .
+                    src: 'package.json'
