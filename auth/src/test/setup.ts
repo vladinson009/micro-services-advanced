@@ -1,32 +1,42 @@
-/*
-    mongo = new MongoMemoryServer();
-    const mongoUri = await mongo.getUri();
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
 
-to this  
+declare global {
+    var signin: () => Promise<string[]>;
+}
 
-mongo = await MongoMemoryServer.create();
-const mongoUri = mongo.getUri();
-
-await mongoose.connect(mongoUri, {});
-
-
-afterAll hook
-
-afterAll(async () => {
-    if(mongo){
-        await mongo.stop()
-        await mongoose.connection.close();
-    }
-})
+let mongo: undefined | MongoMemoryServer;
+beforeAll(async () => {
+    process.env.JWT_KEY = 'asdfg';
+    mongo = await MongoMemoryServer.create();
+    const mongoUri = mongo.getUri();
+    await mongoose.connect(mongoUri, {});
+});
 
 beforeEach(async () => {
-    if(mongoose.connection.db) {
+    if (mongoose.connection.db) {
         const collections = await mongoose.connection.db.collections();
-        
-        for(let collection of collections) {
+
+        for (let collection of collections) {
             await collection.deleteMany({});
         }
     }
-})
+});
 
-*/
+afterAll(async () => {
+    await mongoose.connection.close();
+    if (mongo) {
+        await mongo.stop();
+    }
+});
+
+/**
+ And change to this:
+
+  const cookie = response.get("Set-Cookie");
+
+  if (!cookie) {
+    throw new Error("Failed to get cookie from response");
+  }
+  return cookie;
+ */

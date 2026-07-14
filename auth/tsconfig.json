@@ -4,13 +4,13 @@
         // File Layout
         // "rootDir": "./src",
         // "outDir": "./dist",
-
+        "ignoreDeprecations": "6.0",
         // Environment Settings
         // See also https://aka.ms/tsconfig/module
         "module": "commonjs",
         "target": "es2022",
         "esModuleInterop": true,
-        "types": [],
+        "types": ["node", "jest"],
         // For nodejs:
         // "lib": ["esnext"],
         // "types": ["node"],
