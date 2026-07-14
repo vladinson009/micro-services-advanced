@@ -1,35 +1,37 @@
 apiVersion: skaffold/v4beta14
 kind: Config
 metadata:
-    name: micro-services-advanced
+  name: micro-services-advanced
 manifests:
-    rawYaml:
-        - ./infra/k8s/*
+  rawYaml:
+    - ./infra/k8s/*
 deploy:
-    kubectl: {}
+  kubectl: {}
 build:
-    local:
-        push: false
-    # googleCloudBuild:
-    #     projectId: microservices-dev-501411
-    artifacts:
-        - image: vladinson009/auth
-          context: ./auth
-          docker:
-              dockerfile: Dockerfile
-          sync:
-              manual:
-                  - dest: .
-                    src: 'src/**/*.ts'
-                  - dest: .
-                    src: 'package.json'
-        - image: vladinson009/client
-          context: ./client
-          docker:
-              dockerfile: Dockerfile
-          sync:
-              manual:
-                  - dest: .
-                    src: '**/*.ts'
-                  - dest: .
-                    src: 'package.json'
+  local:
+    push: false
+  # googleCloudBuild:
+  #     projectId: microservices-dev-501411
+  artifacts:
+    - image: vladinson009/auth
+      context: ./auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.ts'
+          - dest: .
+            src: 'package.json'
+    - image: vladinson009/client
+      context: ./client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: '**/*.tsx'
+          - dest: .
+            src: '**/*.ts'
+          - dest: .
+            src: 'package.json'
