@@ -23,3 +23,13 @@ build:
                     src: 'src/**/*.ts'
                   - dest: .
                     src: 'package.json'
+        - image: vladinson009/client
+          context: ./client
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: '**/*.ts'
+                  - dest: .
+                    src: 'package.json'
