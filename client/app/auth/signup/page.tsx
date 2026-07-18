@@ -1,25 +1,26 @@
 'use client';
-import axios, { AxiosError } from 'axios';
+import useRequest from '@/hooks/use-request';
+import { useRouter } from 'next/navigation';
 import { SubmitEvent, useState } from 'react';
 
 export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState([{ message: '' }]);
+  const { doRequest, errors } = useRequest({
+    url: '/api/users/signup',
+    method: 'post',
+    body: {
+      email,
+      password,
+    },
+    onSuccess: () => router.push('/'),
+  });
 
   const onSubmit = async (event: SubmitEvent) => {
-    setErrors([]);
     event.preventDefault();
-    try {
-      await axios.post('/api/users/signup', {
-        email,
-        password,
-      });
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        setErrors(error.response?.data.errors);
-      }
-    }
+
+    await doRequest();
   };
 
   return (
@@ -45,18 +46,7 @@ export default function SignupPage() {
           className="border border-gray-400"
         />
       </div>
-      {errors.length > 0 && (
-        <div className="bg-red-200">
-          <h4>Ooops....</h4>
-          <ul>
-            {errors.map((err) => (
-              <li className="text-red-800" key={err.message}>
-                {err.message}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {errors}
       <button className="cursor-pointer w-fit bg-blue-600 text-background rounded-xs px-4 py-1">
         Sign Up
       </button>
