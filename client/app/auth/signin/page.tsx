@@ -3,12 +3,12 @@ import useRequest from '@/hooks/use-request';
 import { useRouter } from 'next/navigation';
 import { SubmitEvent, useState } from 'react';
 
-export default function SignupPage() {
+export default function SigninPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { doRequest, errors } = useRequest({
-    url: '/api/users/signup',
+    url: '/api/users/signin',
     method: 'post',
     body: {
       email,
@@ -28,7 +28,7 @@ export default function SignupPage() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-3 m-4">
-      <h1 className="text-5xl">Sign Up</h1>
+      <h1 className="text-5xl">Sign In</h1>
       <div className="flex flex-col gap-1">
         <label htmlFor="email">Email Address</label>
         <input
@@ -51,7 +51,7 @@ export default function SignupPage() {
       </div>
       {errors}
       <button className="cursor-pointer w-fit bg-blue-600 text-background rounded-xs px-4 py-1">
-        Sign Up
+        Sign In
       </button>
       <div>{email}</div>
     </form>
