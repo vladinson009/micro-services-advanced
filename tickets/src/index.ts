@@ -9,8 +9,21 @@ const start = async () => {
   if (!process.env.MONGO_URI) {
     throw new Error('No MONGO_URI env');
   }
+  if (!process.env.NATS_CLIENT_ID) {
+    throw new Error('No NATS_CLIENT_ID env');
+  }
+  if (!process.env.NATS_URL) {
+    throw new Error('No NATS_URL env');
+  }
+  if (!process.env.NATS_CLUSTER_ID) {
+    throw new Error('No NATS_CLUSTER_ID env');
+  }
   try {
-    await natsWrapper.connect('ticketing', 'laskjf', 'http://nats-srv:4222');
+    await natsWrapper.connect(
+      process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URL,
+    );
     natsWrapper.client.on('close', () => {
       console.log('NATS connection closed!');
       process.exit();
