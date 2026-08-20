@@ -45,3 +45,13 @@ build:
                     src: 'src/**/*.ts'
                   - dest: .
                     src: 'package.json'
+        - image: vladinson009/orders
+          context: ./orders
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - dest: .
+                    src: 'src/**/*.ts'
+                  - dest: .
+                    src: 'package.json'
