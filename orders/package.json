@@ -34,7 +34,7 @@
     ]
   },
   "dependencies": {
-    "@tickets-vg/common": "^1.0.9",
+    "@tickets-vg/common": "^1.0.11",
     "cookie-session": "^2.1.1",
     "express": "^4.22.2",
     "express-async-errors": "^3.1.1",
