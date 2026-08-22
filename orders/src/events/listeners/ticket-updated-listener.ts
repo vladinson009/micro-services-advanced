@@ -12,7 +12,9 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
     const ticket = await Ticket.findByEvent(data);
 
     if (!ticket) {
-      throw new Error('Ticket not found');
+      // If the ticket doesn't exist yet, don't ack the message so it can be retried
+      // after the corresponding 'ticket:created' event is processed.
+      return;
     }
     const { title, price } = data;
     ticket.set({ title, price });
