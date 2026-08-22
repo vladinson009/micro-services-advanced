@@ -1,3 +1,5 @@
+process.env.JWT_KEY = 'test-secret';
+
 import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
@@ -7,7 +9,6 @@ declare global {
   var signin: () => string[];
 }
 jest.mock('../nats-wrapper');
-
 let mongo: undefined | MongoMemoryServer;
 beforeAll(async () => {
   process.env.JWT_KEY = 'asdfg';
