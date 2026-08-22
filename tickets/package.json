@@ -34,14 +34,13 @@
         ]
     },
     "dependencies": {
-        "@tickets-vg/common": "^1.0.9",
+        "@tickets-vg/common": "^1.0.13",
         "cookie-session": "^2.1.1",
         "express": "^4.22.2",
         "express-async-errors": "^3.1.1",
         "express-validator": "^7.3.2",
         "jsonwebtoken": "^9.0.3",
         "mongoose": "^9.7.3",
-        "mongoose-update-if-current": "^1.4.0",
         "node-nats-streaming": "^0.3.2"
     },
     "devDependencies": {

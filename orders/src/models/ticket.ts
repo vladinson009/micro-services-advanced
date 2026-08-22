@@ -36,8 +36,10 @@ const ticketSchema = new mongoose.Schema(
         const { _id, ...rest } = ret;
         return { ...rest, id: _id };
       },
-      versionKey: false,
+      // versionKey: false,
     },
+    versionKey: 'version',
+    optimisticConcurrency: true,
   },
 );
 
