@@ -17,7 +17,6 @@ interface OrderDoc extends mongoose.Document {
   ticket: TicketDoc;
   version: number;
 }
-
 interface OrderModel extends mongoose.Model<OrderDoc> {
   build(attrs: OrderAttrs): OrderDoc;
 }
@@ -54,6 +53,16 @@ const orderSchema = new mongoose.Schema(
     optimisticConcurrency: true,
   },
 );
+//! Must be commented. Its just an example
+/*
+ Manually optimistic Concurrency 
+ ticketSchema.pre('save', function (done) {
+   this.$where = {
+     version: this.get('version') - 1,
+   };
+   done;
+ }); 
+ */
 
 orderSchema.statics.build = (attrs: OrderAttrs) => new Order(attrs);
 
