@@ -9,6 +9,7 @@ import {
 import { queueGroupName } from './queue-group-name';
 
 import { Ticket } from '../../models/ticket';
+import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher';
 
 class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   subject: Subjects.OrderCreated = Subjects.OrderCreated;
@@ -28,6 +29,18 @@ class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
     // Save the ticket
     await ticket.save();
+
+    // if (!ticket.orderId) {
+    //   throw new Error('[order-created-listener] no orderId');
+    // }
+    await new TicketUpdatedPublisher(this.client).publish({
+      id: ticket.id,
+      price: ticket.price,
+      title: ticket.title,
+      userId: ticket.userId,
+      orderId: data.id,
+      version: ticket.version,
+    });
 
     // Ack the message
     msg.ack();
