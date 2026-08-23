@@ -34,7 +34,7 @@
     ]
   },
   "dependencies": {
-    "@tickets-vg/common": "^1.0.14",
+    "@tickets-vg/common": "^1.0.16",
     "cookie-session": "^2.1.1",
     "dotenv": "^17.4.2",
     "express": "^4.22.2",
