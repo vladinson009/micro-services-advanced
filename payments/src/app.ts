@@ -3,6 +3,7 @@ import 'express-async-errors';
 import cookieSession from 'cookie-session';
 
 import { errorHandler, NotFoundError, currentUser } from '@tickets-vg/common';
+import { createChargeRouter } from './routes/new';
 
 export const app = express();
 
@@ -16,6 +17,7 @@ app.use(
   }),
 );
 app.use(currentUser);
+app.use(createChargeRouter);
 
 app.all('*', async (req, res, next) => {
   throw new NotFoundError(); // Works because of express-async-errors package
