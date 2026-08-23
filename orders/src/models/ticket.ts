@@ -8,9 +8,9 @@ interface TicketAttrs {
 }
 
 export interface TicketDoc extends mongoose.Document {
+  id: string;
   title: string;
   price: number;
-  id: string;
   version: number;
   isReserved(): Promise<boolean>;
 }
