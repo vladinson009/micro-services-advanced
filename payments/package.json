@@ -41,7 +41,8 @@
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.3",
-    "node-nats-streaming": "^0.3.2"
+    "node-nats-streaming": "^0.3.2",
+    "stripe": "^22.5.0"
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.49",
