@@ -18,7 +18,9 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
     if (!order) {
       throw new Error('Order not found');
     }
-    //TODO: Reject cancel if order is paid already
+    if (order.status === OrderStatus.Complete) {
+      return msg.ack();
+    }
     order.set({
       status: OrderStatus.Cancelled,
     });
