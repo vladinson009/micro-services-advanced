@@ -8,6 +8,9 @@ const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('No JWT_KEY env');
   }
+  if (!process.env.STRIPE_KEY) {
+    throw new Error('No STRIPE_KEY env');
+  }
   if (!process.env.MONGO_URI) {
     throw new Error('No MONGO_URI env');
   }

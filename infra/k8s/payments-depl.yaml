@@ -35,13 +35,12 @@ spec:
                             secretKeyRef:
                                 name: jwt-secret
                                 key: JWT_KEY
-                  resources:
-                      requests:
-                          cpu: '100m'
-                          memory: '128Mi'
-                      limits:
-                          cpu: '250m'
-                          memory: '256Mi'
+                      - name: STRIPE_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: stripe-secret
+                                key: STRIPE_KEY
+
 --- # Service
 apiVersion: v1
 kind: Service

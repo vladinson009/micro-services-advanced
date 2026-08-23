@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 
+import 'dotenv/config';
 import { errorHandler, NotFoundError, currentUser } from '@tickets-vg/common';
 import { createChargeRouter } from './routes/new';
 

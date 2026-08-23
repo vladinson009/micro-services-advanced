@@ -8,7 +8,9 @@ import jwt from 'jsonwebtoken';
 declare global {
   var signin: (id?: string) => string[];
 }
+
 jest.mock('../nats-wrapper');
+
 let mongo: undefined | MongoMemoryServer;
 beforeAll(async () => {
   process.env.JWT_KEY = 'asdfg';
