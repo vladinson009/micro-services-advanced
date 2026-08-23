@@ -12,6 +12,13 @@ spec:
         paths:
           # The order of paths is important. The / Path will match all as a wild card
           - pathType: ImplementationSpecific
+            path: '/api/payments(/|$)(.*)'
+            backend:
+              service:
+                name: payments-srv
+                port:
+                  number: 3000
+          - pathType: ImplementationSpecific
             path: '/api/users(/|$)(.*)'
             backend:
               service:
