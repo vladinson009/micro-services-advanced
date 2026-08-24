@@ -5,7 +5,7 @@ interface UseRequestArgs {
   url: string;
   method: 'get' | 'post' | 'patch';
   body?: Record<string, string>;
-  onSuccess?: () => void;
+  onSuccess?: (data?: Record<string, string | number>) => void;
 }
 
 export default function useRequest({
@@ -19,13 +19,13 @@ export default function useRequest({
   const doRequest = async () => {
     try {
       setErrors(null);
-      const respone = await axios[method](url, body);
+      const response = await axios[method](url, body);
 
       if (onSuccess) {
-        onSuccess();
+        onSuccess(response.data);
       }
 
-      return respone.data;
+      return response.data;
     } catch (err) {
       if (err instanceof AxiosError) {
         setErrors(
