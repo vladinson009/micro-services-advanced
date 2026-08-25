@@ -14,7 +14,7 @@ export default function NewTicket() {
       title,
       price,
     },
-    onSuccess: () => router.push('/'),
+    onSuccess: () => router.push(`/tickets/`),
   });
 
   const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {

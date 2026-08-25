@@ -1,25 +1,25 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { JSX, useState } from 'react';
 
-interface UseRequestArgs {
+interface UseRequestArgs<T> {
   url: string;
   method: 'get' | 'post' | 'patch';
   body?: Record<string, string>;
-  onSuccess?: (data?: Record<string, string | number>) => void;
+  onSuccess?: (data?: T) => void;
 }
 
-export default function useRequest({
+export default function useRequest<T>({
   url,
   method,
   body,
   onSuccess,
-}: UseRequestArgs) {
+}: UseRequestArgs<T>) {
   const [errors, setErrors] = useState<null | JSX.Element>(null);
 
   const doRequest = async () => {
     try {
       setErrors(null);
-      const response = await axios[method](url, body);
+      const response: AxiosResponse<T> = await axios[method](url, body);
 
       if (onSuccess) {
         onSuccess(response.data);

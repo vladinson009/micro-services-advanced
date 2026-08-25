@@ -1,6 +1,5 @@
-import { headers } from 'next/headers';
-import buildClient from './build-client';
 import { AxiosError } from 'axios';
+import getClient from './get-client';
 
 export type CurrentUser = {
   id: string;
@@ -10,8 +9,7 @@ export type CurrentUser = {
 
 export default async function getCurrentUser() {
   try {
-    const reqHeaders = await headers();
-    const client = buildClient(reqHeaders);
+    const client =await  getClient()
     const { data } = await client.get<{ currentUser: CurrentUser }>(
       '/api/users/currentuser',
     );
