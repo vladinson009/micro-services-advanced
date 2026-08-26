@@ -1,10 +1,11 @@
-import { CurrentUser } from '@/api/get-current-user';
+import { CurrentUser } from '@/services/user-service';
 import Link from 'next/link';
-import { PropsWithChildren } from 'react';
 
 export default function HeaderComponent({
   currentUser,
-}: PropsWithChildren<{ currentUser: CurrentUser }>) {
+}: {
+  currentUser: CurrentUser;
+}) {
   const links = [
     !currentUser && { label: 'Sign Up', href: '/auth/signup' },
     !currentUser && { label: 'Sign In', href: '/auth/signin' },

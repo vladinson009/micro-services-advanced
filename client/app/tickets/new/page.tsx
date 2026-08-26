@@ -2,19 +2,20 @@
 import { SubmitEvent, useState } from 'react';
 import useRequest from '@/hooks/use-request';
 import { useRouter } from 'next/navigation';
+import { TicketDoc } from '@/services/types';
 
 export default function NewTicket() {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors } = useRequest<TicketDoc>({
     url: '/api/tickets',
     method: 'post',
     body: {
       title,
       price,
     },
-    onSuccess: () => router.push(`/tickets/`),
+    onSuccess: (ticket) => router.push(`/tickets/${ticket.id}`),
   });
 
   const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {

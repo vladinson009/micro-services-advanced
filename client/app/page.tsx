@@ -1,4 +1,4 @@
-import { getTickets } from '@/api/get-tickets';
+import { getTickets } from '@/services/ticket-service';
 import Link from 'next/link';
 
 export default async function LandingPage() {

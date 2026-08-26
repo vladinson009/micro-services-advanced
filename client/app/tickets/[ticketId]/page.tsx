@@ -1,4 +1,4 @@
-import { getTicket } from '@/api/get-tickets';
+import { getTicketById } from '@/services/ticket-service';
 import PurchaseButton from './purchaseButton';
 
 type PageProps = {
@@ -6,7 +6,7 @@ type PageProps = {
 };
 export default async function TicketShow({ params }: PageProps) {
   const param = await params;
-  const ticket = await getTicket(param.ticketId);
+  const ticket = await getTicketById(param.ticketId);
   if (!ticket) return;
 
   return (

@@ -5,7 +5,7 @@ interface UseRequestArgs<T> {
   url: string;
   method: 'get' | 'post' | 'patch';
   body?: Record<string, string>;
-  onSuccess?: (data?: T) => void;
+  onSuccess?: (data: T) => void;
 }
 
 export default function useRequest<T>({
@@ -27,12 +27,14 @@ export default function useRequest<T>({
 
       return response.data;
     } catch (err) {
+      console.log(err);
+
       if (err instanceof AxiosError) {
         setErrors(
           <div className="bg-red-200">
             <h4>Ooops....</h4>
             <ul>
-              {err.response?.data.errors.map((err: { message: string }) => (
+              {err.response?.data?.errors?.map((err: { message: string }) => (
                 <li className="text-red-800" key={err.message}>
                   {err.message}
                 </li>
@@ -40,7 +42,9 @@ export default function useRequest<T>({
             </ul>
           </div>,
         );
+        return;
       }
+      console.error(err);
     }
   };
 
