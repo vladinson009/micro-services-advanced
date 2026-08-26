@@ -16,6 +16,9 @@ spec:
             containers:
                 - name: client
                   image: vladinson009/client
+                  env:
+                      - name: NEXT_PUBLIC_STRIPE_KEY
+                        value: pk_test_51U7akOFydpBeTXgEc7q22bM1Ky1yRQ9zGtfOm6RO80MPhHcvvQUtTa85Ro9WCdOKad4qwu1QPiUm3JeMwl5jlpgv00ZVgPg8to
 
 ---
 apiVersion: v1
