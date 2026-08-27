@@ -2,14 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import useRequest from '@/hooks/use-request';
 
 import { OrderDoc } from '@/services/types';
 import { useCurrentUser } from '@/context/user-context';
 import { env } from '@/env/client';
+import { useRouter } from 'next/navigation';
 
 export default function TimeLeft({ order }: { order: OrderDoc }) {
-  const [timeLeft, setTimeLeft] = useState<null | number>(null);
+  const router = useRouter();
   const { currentUser } = useCurrentUser();
+  const [timeLeft, setTimeLeft] = useState<null | number>(null);
+  const { doRequest, errors } = useRequest({
+    url: '/api/payments',
+    method: 'post',
+    body: {
+      orderId: order.id,
+    },
+    onSuccess: () => router.push('/orders'),
+  });
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -40,11 +51,12 @@ export default function TimeLeft({ order }: { order: OrderDoc }) {
     <div>
       {message}
       <StripeCheckout
+        token={({ id }) => doRequest({ token: id })}
         stripeKey={env.NEXT_PUBLIC_STRIPE_KEY}
-        token={(token) => console.log(token)}
         amount={order.ticket.price * 100}
         email={currentUser?.email}
       />
+      {errors}
     </div>
   );
 }
