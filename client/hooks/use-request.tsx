@@ -16,10 +16,13 @@ export default function useRequest<T>({
 }: UseRequestArgs<T>) {
   const [errors, setErrors] = useState<null | JSX.Element>(null);
 
-  const doRequest = async () => {
+  const doRequest = async (props: Record<string, string> = {}) => {
     try {
       setErrors(null);
-      const response: AxiosResponse<T> = await axios[method](url, body);
+      const response: AxiosResponse<T> = await axios[method](url, {
+        ...body,
+        ...props,
+      });
 
       if (onSuccess) {
         onSuccess(response.data);
@@ -27,8 +30,6 @@ export default function useRequest<T>({
 
       return response.data;
     } catch (err) {
-      console.log(err);
-
       if (err instanceof AxiosError) {
         setErrors(
           <div className="bg-red-200">
