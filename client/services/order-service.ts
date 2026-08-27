@@ -7,3 +7,10 @@ export const getOrderById = async (orderId: string) => {
 
   return order;
 };
+
+export const getUserOrders = async () => {
+  const client = await getClient();
+  const { data: orders } = await client.get<OrderDoc[]>('/api/orders');
+
+  return orders;
+};
