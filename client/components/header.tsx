@@ -9,6 +9,8 @@ export default function HeaderComponent({
   const links = [
     !currentUser && { label: 'Sign Up', href: '/auth/signup' },
     !currentUser && { label: 'Sign In', href: '/auth/signin' },
+    currentUser && { label: 'Sell Tickets', href: '/tickets/new' },
+    currentUser && { label: 'My orders', href: '/orders' },
     currentUser && { label: 'Sign Out', href: '/auth/signout' },
   ]
     .filter((el): el is { label: string; href: string } => Boolean(el))
@@ -25,7 +27,7 @@ export default function HeaderComponent({
       <Link href="/">GitTix</Link>
 
       <div>
-        <ul>{links}</ul>
+        <ul className="flex gap-4">{links}</ul>
       </div>
     </nav>
   );
