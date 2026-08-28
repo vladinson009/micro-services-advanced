@@ -18,7 +18,8 @@ spec:
                   env:
                       - name: MONGO_URI
                         value: 'mongodb://auth-mongo-srv:27017/auth'
-                      - name: JWT_KEY
+                      - name: JWT_KEY # !Create all secrets in deployed cluster
+                        # kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<JWT SECRET HERE>
                         valueFrom:
                             secretKeyRef:
                                 name: jwt-secret

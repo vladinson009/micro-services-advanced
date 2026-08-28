@@ -30,12 +30,12 @@ spec:
                       - name: MONGO_URI
                         value: mongodb://payments-mongo-srv:27017/payments
                         
-                      - name: JWT_KEY
+                      - name: JWT_KEY # !Create all secrets in deployed cluster
                         valueFrom:
                             secretKeyRef:
                                 name: jwt-secret
                                 key: JWT_KEY
-                      - name: STRIPE_KEY
+                      - name: STRIPE_KEY # !Create all secrets in deployed cluster
                         valueFrom:
                             secretKeyRef:
                                 name: stripe-secret
