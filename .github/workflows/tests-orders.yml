@@ -9,5 +9,5 @@ jobs:
     build_and_test:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@v5
             - run: cd orders && npm install && npm run test:ci
