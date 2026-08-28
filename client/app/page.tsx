@@ -23,7 +23,7 @@ export default async function LandingPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Tickets</h1>
+      <h2 className="text-3xl font-bold">Tickets</h2>
       <table className="w-full border-collapse">
         <thead>
           <tr className="border-b">
