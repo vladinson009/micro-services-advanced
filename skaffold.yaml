@@ -18,6 +18,7 @@ build:
           context: ./auth
           docker:
               dockerfile: Dockerfile
+              target: development
           sync:
               manual:
                   - dest: .
@@ -28,6 +29,7 @@ build:
           context: ./client
           docker:
               dockerfile: Dockerfile
+              target: development
           sync:
               manual:
                   - dest: .
@@ -40,6 +42,7 @@ build:
           context: ./tickets
           docker:
               dockerfile: Dockerfile
+              target: development
           sync:
               manual:
                   - dest: .
@@ -50,6 +53,7 @@ build:
           context: ./orders
           docker:
               dockerfile: Dockerfile
+              target: development
           sync:
               manual:
                   - dest: .
@@ -60,6 +64,7 @@ build:
           context: ./expiration
           docker:
               dockerfile: Dockerfile
+              target: development
           sync:
               manual:
                   - dest: .
@@ -70,6 +75,7 @@ build:
           context: ./payments
           docker:
               dockerfile: Dockerfile
+              target: development
           sync:
               manual:
                   - dest: .

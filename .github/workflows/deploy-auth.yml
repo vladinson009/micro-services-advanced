@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: cd auth && docker build -t vladinson009/auth .
+      - run: docker build --target production -t vladinson009/auth:${{github.sha}} ./auth
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      - run: docker push vladinson009/auth
+      - run: docker push vladinson009/auth:${{github.sha}}
 
     #   - uses: digitalocean/action-doctl@v2
     #     with:

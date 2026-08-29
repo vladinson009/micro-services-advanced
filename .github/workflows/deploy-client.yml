@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: cd client && docker build -t vladinson009/client .
+      - run: docker build --target production -t vladinson009/client:${{github.sha}} ./client
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      - run: docker push vladinson009/client
+      - run: docker push vladinson009/client:${{github.sha}}
 
     #   - uses: digitalocean/action-doctl@v2
     #     with:
