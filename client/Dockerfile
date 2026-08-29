@@ -1,8 +1,21 @@
-FROM node:alpine
-
+FROM node:alpine AS base
 WORKDIR /app
-COPY package.json .
-RUN npm install
+COPY package*.json ./
+RUN npm ci
 COPY . .
 
-CMD [ "npm", "run", "dev" ]
+
+FROM base AS development
+CMD ["npm", "run", "dev"]
+
+
+FROM base as builder
+RUN npm run build
+
+
+FROM node:alpine AS production
+WORKDIR /app
+COPY package*.json .
+RUN npm ci --omit=dev
+COPY --from=builder /app/dist ./dist
+CMD ["node", "dist/index.js"]
