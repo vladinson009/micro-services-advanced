@@ -2,8 +2,6 @@ import { natsWrapper } from './nats-wrapper';
 import { OrderCreatedListener } from './events/listeners/order-created-listener';
 
 const start = async () => {
-  console.log('Starting...');
-
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error('No NATS_CLIENT_ID env');
   }
@@ -37,7 +35,7 @@ const start = async () => {
     new OrderCreatedListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
-    console.log('[index.ts] expiration');
+    console.error('[index.ts] expiration');
   }
 };
 start();

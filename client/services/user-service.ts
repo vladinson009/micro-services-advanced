@@ -18,9 +18,9 @@ export default async function getCurrentUser() {
     return currentUser;
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.log(error.message);
+      console.error(error.message);
     } else {
-      console.log(error);
+      console.error(error);
     }
     return null;
   }

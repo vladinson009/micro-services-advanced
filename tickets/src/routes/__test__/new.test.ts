@@ -5,7 +5,6 @@ import { natsWrapper } from '../../nats-wrapper';
 
 it('has a route handler listening to /api/tickets for post request', async () => {
   const response = await request(app).post('/api/tickets').send({});
-  console.log(response.status);
 
   expect(response.status).toEqual(401);
 });
@@ -20,7 +19,6 @@ it('returns a status other than 401 if the user is signed in', async () => {
     .post('/api/tickets')
     .set('Cookie', signin())
     .send({});
-  console.log(response.status);
 
   expect(response.status).not.toEqual(401);
 });
